@@ -15,6 +15,23 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
+/*
+Graphite is a package manager for graphene
+
+
+Usage:
+  graphite [command]
+
+Available Commands:
+  add         Add a dependency
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  init        Initalize a package with an optional name
+  rm          Remove dependency
+
+Flags:
+  -h, --help     help for graphite
+*/
 package main
 
 import "github.com/graphenelang/graphite/cmd"

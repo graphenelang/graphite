@@ -27,12 +27,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// Represents a graphite package
 type Package struct {
 	Name    string   `toml:"name"`
 	Version string   `toml:"version"`
 	Authors []string `toml:"authors"`
 }
 
+// Represents a graphite project
 type Manifest struct {
 	Package      Package           `toml:"package"`
 	Dependencies map[string]string `toml:"dependencies"`
