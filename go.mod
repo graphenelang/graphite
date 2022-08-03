@@ -1,4 +1,4 @@
-module graphenelang/graphite
+module github.com/graphenelang/graphite
 
 go 1.18
 

@@ -17,7 +17,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 package main
 
-import "graphenelang/graphite/cmd"
+import "github.com/graphenelang/graphite/cmd"
 
 func main() {
 	cmd.Execute()
