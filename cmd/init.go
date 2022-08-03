@@ -20,6 +20,8 @@ package cmd
 import (
 	"io/fs"
 	"os"
+	"os/exec"
+	"strings"
 
 	"github.com/pelletier/go-toml/v2"
 	"github.com/spf13/cobra"
@@ -35,6 +37,13 @@ type Manifest struct {
 	Package      Package           `toml:"package"`
 	Dependencies map[string]string `toml:"dependencies"`
 }
+
+const main = `fn main()
+  println("Hello, world!)
+end
+`
+
+const ignore = `/target`
 
 // initCmd represents the init command
 var (
@@ -54,6 +63,12 @@ var (
 				},
 				Dependencies: make(map[string]string),
 			}
+			wd, err := os.Getwd()
+			if err != nil {
+				return err
+			}
+			wds := strings.Split(wd, "/")
+			manifest.Package.Name = wds[len(wds)-1]
 			if len(args) == 1 {
 				manifest.Package.Name = args[0]
 			}
@@ -75,7 +90,21 @@ var (
 			if err != nil {
 				return err
 			}
-			s.Write([]byte("fn main()\n  println(\"Hello, world!\")\nend"))
+			s.Write([]byte(main))
+
+			i, err := os.Create("./.gitignore")
+			if err != nil {
+				return err
+			}
+			i.Write([]byte(ignore))
+
+			git := exec.Command("git", "init")
+
+			err = git.Run()
+
+			if err != nil {
+				return err
+			}
 
 			return nil
 		},
