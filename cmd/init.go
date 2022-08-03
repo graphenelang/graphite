@@ -18,6 +18,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package cmd
 
 import (
+	"io/fs"
 	"os"
 
 	"github.com/pelletier/go-toml/v2"
@@ -65,6 +66,16 @@ var (
 				return err
 			}
 			f.Write(b)
+
+			err = os.Mkdir("src", fs.ModePerm)
+			if err != nil {
+				return err
+			}
+			s, err := os.Create("./src/main.graphene")
+			if err != nil {
+				return err
+			}
+			s.Write([]byte("fn main()\n  println(\"Hello, world!\")\nend"))
 
 			return nil
 		},

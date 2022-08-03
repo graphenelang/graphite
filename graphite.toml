@@ -1,8 +1,0 @@
-[Package]
-Name = 'test'
-Version = '0.1.0'
-Authors = ['zimlit']
-
-[Dependencies]
-y = '0.1.0'
-
